@@ -27,7 +27,9 @@ def test_comments_post_id(id_):
     """
     Проверка совпадения ID поста у возвращённых комментариев с указанным в ссылке
     """
-    response_json = get(f'https://jsonplaceholder.typicode.com/comments?postId={id_}').json()
+    response_json = get(
+        f'https://jsonplaceholder.typicode.com/comments?postId={id_}'
+    ).json()
     assert all(comment['postId'] == id_ for comment in response_json)
 
 
@@ -45,10 +47,8 @@ def test_create_post_user_id(id_):
     """
     Проверка совпадения ID у созданного поста с указанным в ссылке
     """
-    sample_post = {
-      'title': 'foo',
-      'body': 'bar',
-      'userId': id_
-    }
-    response_json = post('https://jsonplaceholder.typicode.com/posts', json=sample_post).json()
+    sample_post = {'title': 'foo', 'body': 'bar', 'userId': id_}
+    response_json = post(
+        'https://jsonplaceholder.typicode.com/posts', json=sample_post
+    ).json()
     assert response_json['userId'] == id_
